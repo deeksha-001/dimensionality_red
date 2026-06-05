@@ -25,14 +25,23 @@ st.markdown(
 # -----------------------------
 # Load Models
 # -----------------------------
-scaler = joblib.load("models/scaler.pkl")
-pca = joblib.load("models/pca.pkl")
+
+from pathlib import Path
+import joblib
+
+BASE_DIR = Path(__file__).resolve().parent
+
+MODELS_DIR = BASE_DIR / "models"
+
+scaler = joblib.load(MODELS_DIR / "scaler.pkl")
+pca = joblib.load(MODELS_DIR / "pca.pkl")
 
 # -----------------------------
 # Upload Dataset
 # -----------------------------
+DATA_PATH = BASE_DIR / "data" / "data.csv"
 
-df = pd.read_csv("data/data.csv")
+df = pd.read_csv(DATA_PATH)
 if not df.empty:
 
     st.subheader("Dataset Preview")
